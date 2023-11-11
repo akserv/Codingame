@@ -1,0 +1,19 @@
+            string[] stocks = { "prod1", "prod2", "prod3", "prod4" };
+            float[,] prices = new float[,] { { 1, 2, 3, 4}, { 6, 7, 8, 9 }, { 10, 11, 12, 13 }, { 14, 15, 16, 17 } };
+            int count = 0;
+            Dictionary<string, float> dictionary = new Dictionary<string, float>();
+            var t = prices.Cast<float>()
+                   .GroupBy(x => count++ / prices.GetLength(1))
+                   .Select(g => g.Average())
+                   .ToArray();
+            count = 0;
+            foreach(var s in stocks)
+            {
+                dictionary.Add(s, t[count]);
+                count++;
+            }
+            var resl = dictionary.OrderByDescending(x => x.Value).Take(3).Select(d => d.Key);
+            foreach(var res in resl)
+            {
+                Console.WriteLine($"{ res}");
+            }

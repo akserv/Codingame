@@ -1,0 +1,25 @@
+    string path = @"C:\tmp\documents";
+
+    DirectoryInfo folder = new DirectoryInfo(path);
+    var directories = folder.GetDirectories("*.*", SearchOption.AllDirectories);
+
+
+    IEnumerable<string> directoriesWithDot =
+     directories.Where(dir => dir.Name.Contains("."))
+                .Select(dir => dir.FullName);
+
+
+    IEnumerable<string> filesInDirectoriesWithoutDot =
+     directories.Where(dir => !dir.Name.Contains("."))
+                .SelectMany(dir => dir.GetFiles("*.*", SearchOption.TopDirectoryOnly))
+                .Select(file => file.FullName);
+
+
+    return string.Join(Environment.NewLine, directoriesWithDot.Union(filesInDirectoriesWithoutDot));
+
+    //string path = @"C:\tmp\documents";
+    //var folder = new DirectoryInfo(path);
+
+    //var dicretories = folder.GetFiles("universe-formula", SearchOption.AllDirectories);
+    //if (directories.Count() >= )
+    //    return directories[0].FullName;
