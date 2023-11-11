@@ -1,0 +1,22 @@
+DancerGetPosition(int n)
+{
+var position = 0;
+var actual_step = 0;
+var penultimate_step = 1;
+var last_step = -2;
+
+for(int i=1; i< n; i++)
+{
+if(i ==1 )
+position += 1;
+if(i == 2 )
+position -= 2
+else
+{
+position += (last_step - penultimate_step );
+actual_step = last_step - penultimate_step;
+penultimate_step = last_step
+last_step = actual_step;
+}
+return position;
+}
